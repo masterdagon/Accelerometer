@@ -77,4 +77,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/z_acc"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/type"
+        android:layout_below="@+id/z_acc"/>
+
 </RelativeLayout>

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager accSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
-    public TextView showX_acc, showY_acc, showZ_acc;
+    public TextView showX_acc, showY_acc, showZ_acc,type;
     public Button button;
     private Boolean state = true;
 
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         showY_acc = (TextView) findViewById(R.id.y_acc);
         showZ_acc = (TextView) findViewById(R.id.z_acc);
         button = (Button) findViewById(R.id.button);
+        type = (TextView)findViewById(R.id.type);
 
         accSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = accSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float y = 0;
         float z = 0;
         Sensor mySensor = sensorEvent.sensor;
-        makeToast(String.valueOf(mySensor.getType()));
+        type.setText(mySensor.getName());
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             x = sensorEvent.values[0];
             y = sensorEvent.values[1];
@@ -121,18 +122,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if ((curTime - lastUpdate) > 300) {
                 lastUpdate = curTime;
 
-                if (x > 0.25) {
+                if (x > 0.25 || x < 0.25) {
                     showX_acc.setText(String.valueOf(x).substring(0,4));
                 } else {
                     showX_acc.setText(String.valueOf(0));
                 }
 
-                if (y > 0.25) {
+                if (y > 0.25 || y < 0.25) {
                     showY_acc.setText(String.valueOf(y).substring(0,4));
                 } else {
                     showY_acc.setText(String.valueOf(0));
                 }
-                if (z > 0.25) {
+                if (z > 0.25 || z < 0.25) {
                     showZ_acc.setText(String.valueOf(z).substring(0,4));
                 } else {
                     showZ_acc.setText(String.valueOf(0));
